@@ -11,7 +11,7 @@
       <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
-              <li class='btn-small btn-warning'><a href="/quit">exit game</a></li>
+                <li class='btn-warning'><a href="/quit">exit game</a></li>
             </ul>
         </div>
       </div>
@@ -21,6 +21,9 @@
     <%if @error %>
       <div class="alert alert-error"><%=@error%></div>
     <% end %>
+    <% if @success %>
+      <div class="alert alert-success"><%= @success %></div>
+      <% end %>
       <%= yield %>
   </div>
   </body>

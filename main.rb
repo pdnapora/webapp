@@ -3,14 +3,35 @@ require 'sinatra'
 
 set :sessions, true
 
-get '/form' do
-  erb :form
+helpers do
+  def calculate_total(cards)
+    arr = cards.map{|element| element[1]}
+
+    total = 0
+    arr.each do |a|
+      if a == 'a'
+        total += 11
+      else
+        total += a.to_i == 0 ? 10 : a.to_i
+      end
+    end
+
+    # correct for aces
+    arr.select{|element| element == 'a'}.count.times do
+      break if total <= 21
+      total -= 10
+    end
+
+    total
+  end
 end
 
+before do
+  @show_button_flag = true
+end
 
 # make sure that we have a username set
 get '/' do
-  # params['username'] = 'freddie'
   if session[:player_name]
     redirect '/game'
   else
@@ -47,10 +68,18 @@ get '/quit' do
   erb :quit
 end
 
-post '/hit' do
-  'TODO: code to execute when player "hits"'
+post '/game/player/hit' do
+  session[:player_cards] << session[:deck].pop
+  if calculate_total(session[:player_cards]) > 21
+    @error = session[:player_name].to_s + " busts! better luck next time..."
+    @show_button_flag = false
+  end
+
+  erb :game
 end
 
-post '/stay' do
-  'TODO: code to execute when player "stays"'
+post '/game/player/stay' do
+  @success = session[:player_name].to_s + " stays."
+  @show_button_flag = false
+  erb :game
 end
