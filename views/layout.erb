@@ -11,13 +11,13 @@
       <div class="navbar-inner">
         <div class="container">
             <ul class="nav">
-              <li><a href="/quit">exit game</a></li>
+              <li class='btn-small btn-warning'><a href="/quit">exit game</a></li>
             </ul>
         </div>
       </div>
     </div>
 
-  <div class="container">
+  <div class="container" id='main'>
     <%if @error %>
       <div class="alert alert-error"><%=@error%></div>
     <% end %>

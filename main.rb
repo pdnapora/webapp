@@ -47,11 +47,10 @@ get '/quit' do
   erb :quit
 end
 
-get '/new_test' do
-  redirect '/test2'
+post '/hit' do
+  'TODO: code to execute when player "hits"'
 end
 
-get '/test2' do
-  'hello, working redirect'
+post '/stay' do
+  'TODO: code to execute when player "stays"'
 end
-

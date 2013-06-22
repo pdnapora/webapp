@@ -6,4 +6,12 @@
 <br />
 <p><%= session[:player_name] %> has:</p>
 <%= session[:player_cards] %>
+<br />
+<br />
+<form>
+<input method='post' action='/hit' type='submit' class='btn-large btn-success' name='hit_button' value='hit me!'>
+</form>
+<form>
+<input method='post' action='/stay' type='submit' class='btn-large btn-danger' name='stay_button' value='stay'>
+</form>
 
